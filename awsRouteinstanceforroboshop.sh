@@ -1,9 +1,9 @@
 #!/bin/bash
 
 AMI="ami-0b4f379183e5706b9" #this keeps on changing
-SG_ID="sg-014eccb356d7ab4d2" #replace with your SG ID
+SG_ID="sg-014eccb356d7ab4d2" #replace with your SG ID sg-014eccb356d7ab4d2 present sg ID
 INSTANCES=(  "mysql"  "backend" "frontend")
-ZONE_ID=Z0321255HE9OPZ7QKB2P # replace your zone ID
+ZONE_ID=Z0321255HE9OPZ7QKB2P # replace your zone ID Z0321255HE9OPZ7QKB2P present zoneID
 DOMAIN_NAME="aidevops.website"
 
 for i in "${INSTANCES[@]}"
