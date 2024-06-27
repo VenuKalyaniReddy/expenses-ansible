@@ -2,13 +2,13 @@
 
 AMI="ami-0b4f379183e5706b9" #this keeps on changing
 SG_ID="sg-014eccb356d7ab4d2" #replace with your SG ID
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
+INSTANCES=(  "mysql"  "backend" "frontend")
 ZONE_ID=Z0321255HE9OPZ7QKB2P # replace your zone ID
 DOMAIN_NAME="aidevops.website"
 
 for i in "${INSTANCES[@]}"
 do
-    if [ $i == "mongodb" ] || [ $i == "mysql" ] || [ $i == "shipping" ]
+    if [ $i == "mysql" ] 
     then
         INSTANCE_TYPE="t3.small"
     else
