@@ -1,5 +1,5 @@
-- name: web
-  hosts: web
+- name: frontend
+  hosts: frontend
   become: yes
   tasks: 
   - name: install nginx
