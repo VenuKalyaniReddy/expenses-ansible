@@ -14,9 +14,9 @@
 
   - name: Download the frontend content and extract 
     ansible.builtin.unarchive:
-        url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
 
   # - name: Extract application
   #   ansible.builtin.unarchive:
