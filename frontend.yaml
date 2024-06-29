@@ -14,7 +14,7 @@
 
   - name: remove default content in html 
     ansible.builtin.file:
-       path: /usr/share/nginx/html/*
+       path: /usr/share/nginx/html/
        state: directory
 
   - name: Download the frontend content and extract 
