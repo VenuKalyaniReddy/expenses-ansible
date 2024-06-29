@@ -13,7 +13,7 @@
        state: absent
 
   - name: Download the frontend content and extract 
-    ansible.builtin.get_url:
+    ansible.builtin.unarchive:
         url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
         dest: /usr/share/nginx/html
         remote_src: yes
