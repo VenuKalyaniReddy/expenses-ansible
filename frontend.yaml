@@ -12,16 +12,17 @@
        path: /usr/share/nginx/html/*
        state: absent
 
-  - name: Download the frontend content
+  - name: Download the frontend content and extract 
     ansible.builtin.get_url:
         url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-        dest: /tmp
+        dest: /usr/share/nginx/html
+        remote_src: yes
 
-  - name: Extract application
-    ansible.builtin.unarchive:
-      src: /tmp/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+  # - name: Extract application
+  #   ansible.builtin.unarchive:
+  #     src: /tmp/frontend.zip
+  #     dest: /usr/share/nginx/html
+  #     remote_src: yes
 
   - name: copy expense configuration
     ansible.builtin.copy:
