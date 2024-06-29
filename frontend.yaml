@@ -12,6 +12,11 @@
        path: /usr/share/nginx/html/*
        state: absent
 
+  - name: remove default content in html 
+    ansible.builtin.file:
+       path: /usr/share/nginx/html/*
+       state: directory
+
   - name: Download the frontend content and extract 
     ansible.builtin.unarchive:
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
