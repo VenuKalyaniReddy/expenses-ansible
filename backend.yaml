@@ -59,9 +59,8 @@
       ansible.builtin.command: dnf install mysql -y
 
     - name: Load Schema
-      ansible.builtin.shell: mysql -h mysql.aidevops.website -uroot p{{mysql_password}} < /app/schema/backend.sql
+      ansible.builtin.shell: mysql -h mysql.aidevops.website -uroot -p{{mysql_password}} < /app/schema/backend.sql
       
-
     - name: Restart backend 
       ansible.builtin.service:
         name: backend
