@@ -15,8 +15,11 @@
         state: started
         enabled: yes
 
+    # - name: seting root password 
+    #   ansible.builtin.command: mysql_secure_installation --set-root-pass {{ Password }}
+
     - name: seting root password 
-      ansible.builtin.command: mysql_secure_installation --set-root-pass {{ Password }}
+      ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
 
 
 
