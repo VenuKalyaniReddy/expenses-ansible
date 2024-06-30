@@ -1,54 +1,57 @@
-- name: backend
+- name: installing backend
   hosts: backend
-  become: yes
+  become: yes 
   tasks: 
-    - name: disable current nodejs
+    - name: desableing nodejs
       ansible.builtin.command: dnf module disable nodejs -y
+        
+    - name: enable node 20
+      ansible.builtin.command: dnf module enable nodejs:20 -y
 
-    - name: enable nodejs:20 
-      ansible.builtin.command: dnf module enable nodejs:20 -y 
-
-    - name: install nodejs
+    - name: installing node 20
       ansible.builtin.dnf:
-        name: nginx
-        state: present
+        name: nodejs 
+        state: present 
     
-    - name: adding user expense
+    - name: useradd 
       ansible.builtin.user:
         name: expense
-
-    - name: create app directory
+    
+    - name: create app directory  # this will not impact the process
       ansible.builtin.file:
-        path: /app
+        path: /app 
         state: directory
 
-    - name: download the app directory
+    - name: Download the application
       ansible.builtin.get_url:
         url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
         dest: /tmp/backend.zip
-        
-    
-    - name: unarchive  application
+
+    - name: unzipping 
       ansible.builtin.unarchive:
         src: /tmp/backend.zip
         dest: /app
         remote_src: yes
 
-   
-    - name: install dependencies
+    - name: install npm dependencies 
       ansible.builtin.command: npm install
       args:
         chdir: /app
-    
 
-    - name: copy the backens service 
+    - name: copy backend service 
       ansible.builtin.copy:
         src: backend.service
         dest: /etc/systemd/system/backend.service
 
-    - name: deamon realod and start
+    - name: daemon-reload
       ansible.builtin.systemd_service:
-        daemon_reload: true
+        daemon_reload: true  
+
+    - name: start and enabling 
+      ansible.builtin.service:
+        name: backend
+        enabled: yes
+        state: started
 
     
       
