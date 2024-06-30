@@ -1,6 +1,8 @@
 - name: installing backend
   hosts: backend
   become: yes 
+  vars:
+    mysql_password: ExpenseApp@1
   tasks: 
     - name: desableing nodejs
       ansible.builtin.command: dnf module disable nodejs -y
@@ -55,9 +57,14 @@
 
     - name: install mysql 
       ansible.builtin.command: dnf install mysql -y
+
+    - name: check cities schema exists or not
+      ansible.builtin.command:  mysql -h mysql.aidevops.website -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
+      register: schema
     
     - name: Load Schema
       ansible.builtin.shell: mysql -h mysql.aidevops.website -uroot -pExpenseApp@1 < /app/schema/backend.sql
+      when: schema.stdout != "1"
 
     - name: Restart backend 
       ansible.builtin.service:
